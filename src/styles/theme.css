@@ -1,0 +1,66 @@
+:root {
+  /* === FUNDOS PRINCIPAIS === */
+  --bg-primary: #05080F;        /* Preto azulado (fundo geral) */
+  --bg-secondary: #0A1222;      /* Azul marinho escuro */
+  --bg-tertiary: #0F1B33;       /* Azul profundo para cards */
+  --bg-overlay: rgba(5, 8, 15, 0.85);
+
+  /* === FUNDOS DE CONTRASTE / CAMADAS === */
+  --bg-elevated-1: #121A2E;   /* Azul escuro claro – cards */
+  --bg-elevated-2: #18264A;   /* Azul marinho médio */
+  --bg-elevated-3: #1F3470;   /* Azul mais vivo (destaque leve) */
+
+  /* === FUNDOS INTERATIVOS === */
+  --bg-hover: #1A2D5C;        /* Hover de cards/botões */
+  --bg-active: #243C8A;       /* Botão pressionado */
+
+  /* === FUNDOS DE DESTAQUE === */
+  --bg-highlight: #0E2A47;    /* Destaque suave (timer, ranking) */
+  --bg-panel: #101C3A;        /* Painéis laterais */
+
+  /* === BORDAS PARA CONTRASTE === */
+  --border-contrast: #2B4D9A; /* Borda mais visível */
+  --border-soft: #1E2F5C;
+
+  /* === TEXTO SOBRE FUNDOS MAIS CLAROS === */
+  --text-on-elevated: #F1F5FF;
+
+  /* === TEXTO === */
+  --text-primary: #E6EAF2;      /* Branco frio (texto principal) */
+  --text-secondary: #A9B0C2;    /* Cinza azulado */
+  --text-muted: #6F7A99;        /* Texto desativado */
+  --text-inverted: #05080F;     /* Texto sobre botões claros */
+
+  /* === CORES DE AÇÃO (BOTÕES) === */
+  --btn-primary: #1E3AFF;       /* Azul vibrante */
+  --btn-primary-hover: #2F4BFF;
+  --btn-secondary: #162A6A;     /* Azul escuro */
+  --btn-secondary-hover: #1D3B8C;
+
+  /* === DESTAQUES / CONTRASTE === */
+  --accent-primary: #00C2FF;    /* Ciano elétrico */
+  --accent-secondary: #3B82F6;  /* Azul médio */
+  --accent-glow: rgba(0, 194, 255, 0.35);
+
+  /* === FEEDBACK DO QUIZ === */
+  --success: #22C55E;           /* Resposta correta */
+  --success-bg: rgba(34, 197, 94, 0.15);
+
+  --error: #EF4444;             /* Resposta errada */
+  --error-bg: rgba(239, 68, 68, 0.15);
+
+  --warning: #F59E0B;           /* Tempo acabando */
+  --warning-bg: rgba(245, 158, 11, 0.15);
+
+  /* === BORDAS E DIVISORES === */
+  --border-default: #1F2A44;
+  --border-highlight: #00C2FF;
+
+  /* === SOMBRAS === */
+  --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.4);
+  --shadow-strong: 0 0 30px rgba(0, 194, 255, 0.2);
+
+  /* === ESTADOS === */
+  --disabled: #2A3147;
+  --focus-ring: #00C2FF;
+}

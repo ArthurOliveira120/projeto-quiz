@@ -1,0 +1,83 @@
+/* === BASE DO BOTÃO === */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  font-weight: 600;
+  border-radius: 10px;
+  border: 1px solid transparent;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-soft);
+}
+
+/* === TAMANHOS === */
+.btn-sm {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
+}
+
+.btn-md {
+  padding: 0.7rem 1.2rem;
+  font-size: 0.95rem;
+}
+
+.btn-lg {
+  padding: 0.9rem 1.6rem;
+  font-size: 1.05rem;
+}
+
+/* === VARIANTES === */
+.btn-primary {
+  background: var(--btn-primary);
+  color: var(--text-primary);
+}
+
+.btn-primary:hover {
+  background: var(--btn-primary-hover);
+  box-shadow: 0 0 14px var(--accent-glow);
+}
+
+.btn-secondary {
+  background: var(--btn-secondary);
+  color: var(--text-primary);
+}
+
+.btn-secondary:hover {
+  background: var(--btn-secondary-hover);
+}
+
+.btn-outline {
+  background: transparent;
+  border-color: var(--border-contrast);
+  color: var(--text-primary);
+}
+
+.btn-outline:hover {
+  background: var(--bg-hover);
+}
+
+.btn-success {
+  background: var(--success);
+  color: #ffffff;
+}
+
+.btn-danger {
+  background: var(--error);
+  color: #ffffff;
+}
+
+/* === ESTADOS === */
+.btn:disabled,
+.btn-loading {
+  background: var(--disabled);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.btn-full {
+  width: 100%;
+}

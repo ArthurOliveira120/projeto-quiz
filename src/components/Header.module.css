@@ -1,0 +1,19 @@
+.header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 1rem 2rem;
+  height: 5rem;
+  background-color: var(--bg-primary);
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 1rem;
+}
+
+.loginButton {
+  margin-left: auto;
+}
