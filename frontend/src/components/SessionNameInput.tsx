@@ -25,8 +25,4 @@ export function SessionNameInput() {
       )}
     </div>
   );
-<<<<<<< HEAD:frontend/src/components/SessionNameInput.tsx
 }
-=======
-}
->>>>>>> f83d03eaf22b179ee2cf5f707a95abcd639cceda:src/components/SessionNameInput.tsx
