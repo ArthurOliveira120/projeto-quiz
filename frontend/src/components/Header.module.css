@@ -14,6 +14,23 @@
   gap: 1rem;
 }
 
-.loginButton {
+.myGamesButton {
   margin-left: auto;
+}
+
+.link {
+  text-decoration: none;
+  color: var(--accent-secondary);
+  font-size: 2rem;
+  text-shadow: 0 2px 20px var(--accent-primary);
+}
+
+@media (max-width: 480px) {
+  .link {
+    font-size: 1.5rem
+  }
+
+  .myGamesButton {
+    font-size: 0.8rem;
+  }
 }

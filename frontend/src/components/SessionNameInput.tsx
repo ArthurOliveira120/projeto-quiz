@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useSession } from "../contexts/SessionContext";
 
+import styles from "./SessionNameInput.module.css";
+import { Button } from "./Button";
+
 export function SessionNameInput() {
   const { session, setName } = useSession();
   const [value, setValue] = useState(session.name ?? "");
@@ -11,17 +14,22 @@ export function SessionNameInput() {
   }
 
   return (
-    <div>
+    <div className={styles.inputContainer}>
       <input
         type="text"
         placeholder="Seu nome"
         value={value}
         onChange={(e) => setValue(e.target.value)}
+        className={styles.inputName}
       />
-      <button onClick={handleSave}>Salvar nome</button>
+      <Button size="sm" onClick={handleSave}>
+        Salvar nome
+      </Button>
 
       {session.name && (
-        <p>Nome atual: <strong>{session.name}</strong></p>
+        <p>
+          Nome atual: <strong>{session.name}</strong>
+        </p>
       )}
     </div>
   );

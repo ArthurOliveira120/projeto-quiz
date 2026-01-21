@@ -1,0 +1,15 @@
+.optionsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+
+  padding: 1rem;
+  margin: 0 auto;
+
+  max-height: 100vh;
+  overflow-y: auto;
+  
+  box-sizing: border-box;
+
+  scroll-behavior: smooth;
+}
