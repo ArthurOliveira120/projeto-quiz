@@ -14,8 +14,23 @@ export function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Index />} />
-      <Route path="/play/:pin" element={<Play />} />
-      <Route path="/host/:pin" element={<Host />} />
+
+      <Route
+        path="/play/:pin"
+        element={
+          <ProtectedRoute>
+            <Play />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/host/:pin"
+        element={
+          <ProtectedRoute>
+            <Host />
+          </ProtectedRoute>
+        }
+      />
 
       <Route
         path="/games"

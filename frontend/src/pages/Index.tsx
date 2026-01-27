@@ -19,10 +19,16 @@ export function Index() {
             className={styles.inputRoomPin}
             placeholder="PIN da sala"
             ref={inputRef}
+            maxLength={6}
           />
           <Button
             className={styles.enterRoomButton}
             onClick={() => {
+              if (!inputRef.current?.value || inputRef.current.value.length !== 6) {
+                alert("Digite um PIN válido");
+                return;
+              }
+
               navigate(`/play/${inputRef.current?.value}`);
             }}
           >

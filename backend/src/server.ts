@@ -45,6 +45,8 @@ type GameState = {
 
 const gameStateByPin: Record<string, GameState> = {};
 
+const socketToPlayer: Record<string, { pin: string; name: string }> = {};
+
 io.on("connection", (socket) => {
   console.log("🟢 Cliente conectado:", socket.id);
 
@@ -54,6 +56,8 @@ io.on("connection", (socket) => {
       .select("id, status")
       .eq("pin", pin)
       .single();
+
+    socketToPlayer[socket.id] = { pin, name };
 
     if (error || !data) {
       socket.emit("join_error", {
@@ -69,13 +73,25 @@ io.on("connection", (socket) => {
       playersByPin[pin] = [];
     }
 
-    playersByPin[pin].push(name);
+    playersByPin[pin] = Array.from(
+      new Set([...(playersByPin[pin] || []), name]),
+    );
 
     io.to(pin).emit("players_update", playersByPin[pin]);
   });
 
   socket.on("disconnect", () => {
-    console.log("🔴 Cliente desconectado:", socket.id);
+    const data = socketToPlayer[socket.id];
+
+    if (!data) return;
+
+    const { pin, name } = data;
+
+    playersByPin[pin] = playersByPin[pin].filter((player) => player !== name);
+
+    io.to(pin).emit("players_update", playersByPin[pin]);
+
+    delete socketToPlayer[socket.id];
   });
 
   socket.on("start_game", async ({ pin }) => {
