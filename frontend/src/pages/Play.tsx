@@ -1,7 +1,9 @@
-import { useEffect, useRef } from "react";
+import styles from "./Play.module.css";
+import { useEffect, useRef, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useSocket } from "../hooks/useSocket";
 import { useSession } from "../hooks/useSession";
+import type { Question } from "../types/game";
 
 export function Play() {
   const { pin } = useParams<{ pin: string }>();
@@ -10,14 +12,19 @@ export function Play() {
   const navigate = useNavigate();
   const joinedRef = useRef(false);
 
+  const [question, setQuestion] = useState<Question | null>(null);
+
   useEffect(() => {
-    if (!pin || !session || joinedRef.current) return;
+    if (!pin || !session || !socket.connected || joinedRef.current) return;
 
-    const username = session.user.user_metadata.username;
+    const name =
+      session.user.user_metadata?.username ||
+      session.user.email?.split("@")[0] ||
+      "Jogador";
 
-    socket.emit("join_game", {
+    socket.emit("player_join", {
       pin,
-      name: username,
+      name,
     });
 
     joinedRef.current = true;
@@ -30,12 +37,55 @@ export function Play() {
     return () => {
       socket.off("join_error");
     };
-  }, [pin, session, socket]);
+  }, [pin, session, socket.connected]);
+
+  useEffect(() => {
+    socket.on("question", (data: Question) => {
+      setQuestion(data);
+    });
+
+    return () => {
+      socket.off("question");
+    };
+  }, [socket]);
+
+  function handleAnswer(optionId: string) {
+    if (!question || !pin) return;
+
+    socket.emit("submit_answer", {
+      pin,
+      questionId: question.id,
+      optionId,
+      playerName: session?.user.user_metadata.username,
+    });
+  }
 
   return (
-    <div>
-      <h1>Entrou na sala {pin}</h1>
-      <p>Aguardando o host iniciar o jogo…</p>
+    <div className={styles.container}>
+      {!question ? (
+        <div className={styles.waiting}>
+          <h1>Sala {pin}</h1>
+          <p>Aguardando o host iniciar o jogo…</p>
+        </div>
+      ) : (
+        <>
+          <div className={styles.question}>
+            <h1>{question.text}</h1>
+          </div>
+
+          <div className={styles.options}>
+            {question.options.map((opt) => (
+              <button
+                key={opt.id}
+                className={styles.opt}
+                onClick={() => handleAnswer(opt.id)}
+              >
+                {opt.text}
+              </button>
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 }

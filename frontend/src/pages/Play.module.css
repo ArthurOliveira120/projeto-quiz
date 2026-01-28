@@ -1,15 +1,90 @@
-.optionsGrid {
+.container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f172a, #020617);
+  color: #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  gap: 24px;
+}
+
+/* ===== SALA / AGUARDANDO ===== */
+
+.waiting {
+  text-align: center;
+  max-width: 400px;
+}
+
+.waiting h1 {
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+}
+
+.waiting p {
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+/* ===== PERGUNTA ===== */
+
+.question {
+  background: #020617;
+  border: 1px solid #1e293b;
+  border-radius: 16px;
+  padding: 24px;
+  max-width: 700px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.question h1 {
+  font-size: 1.6rem;
+  line-height: 1.4;
+}
+
+/* ===== OPÇÕES ===== */
+
+.options {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  width: 100%;
+  max-width: 700px;
+}
 
-  padding: 1rem;
-  margin: 0 auto;
+.opt {
+  background: #0f172a;
+  border: 2px solid #1e293b;
+  border-radius: 14px;
+  padding: 18px;
+  font-size: 1rem;
+  color: #e5e7eb;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
 
-  max-height: 100vh;
-  overflow-y: auto;
-  
-  box-sizing: border-box;
+.opt:hover {
+  border-color: #38bdf8;
+  background: #020617;
+  transform: translateY(-2px);
+}
 
-  scroll-behavior: smooth;
+.opt:active {
+  transform: scale(0.98);
+}
+
+/* ===== RESPONSIVO ===== */
+
+@media (max-width: 500px) {
+  .question h1 {
+    font-size: 1.3rem;
+  }
+
+  .opt {
+    padding: 14px;
+    font-size: 0.95rem;
+  }
 }

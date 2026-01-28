@@ -9,7 +9,6 @@ import { Button } from "../components/Button";
 
 import type { Question } from "../types/game";
 
-
 export function Host() {
   const { pin } = useParams<{ pin: string }>();
   const socket = useSocket();
@@ -20,20 +19,24 @@ export function Host() {
   const [gameStarted, setGameStarted] = useState(false);
   const [question, setQuestion] = useState<Question | null>(null);
 
+  console.log("PIN:", pin);
+  console.log("socket connected?", socket.connected);
+
   useEffect(() => {
     if (!pin || !session) return;
 
-    const username = session.user.user_metadata.username;
+    const username =
+      session.user.user_metadata?.username ||
+      session.user.email?.split("@")[0] ||
+      "Jogador";
 
-    socket.emit("join_game", {
-      pin,
-      name: username,
-    });
+    socket.emit("host_join", { pin });
 
     socket.on("players_update", setPlayers);
 
     socket.on("game_started", () => {
       setGameStarted(true);
+      socket.emit("next_question", { pin });
     });
 
     socket.on("question", (question: Question) => {
@@ -53,7 +56,30 @@ export function Host() {
     };
   }, [pin, session, socket]);
 
+  useEffect(() => {
+    socket.on("player_answered", ({ playerName }) => {
+      console.log(`${playerName} respondeu`);
+    });
+
+    return () => {
+      socket.off("player_answered");
+    };
+  }, [socket]);
+
   function handleStartGame() {
+    console.log("função do carai sendo chamada");
+
+    if (!pin) {
+      console.log("pin inválido");
+      return;
+    }
+
+    if (!socket.connected) {
+      console.log("Socket não conectado");
+      return;
+    }
+
+    console.log("emitindo o start game");
     socket.emit("start_game", { pin });
   }
 
@@ -88,11 +114,7 @@ export function Host() {
             Iniciar Jogo
           </Button>
         ) : (
-          <Button
-            variant="secondary"
-            size="lg"
-            onClick={handleNextQuestion}
-          >
+          <Button variant="secondary" size="lg" onClick={handleNextQuestion}>
             Próxima Pergunta
           </Button>
         )}

@@ -18,6 +18,8 @@ export function Games() {
         .select("*")
         .eq("user_id", session?.user.id);
 
+      if (error) throw error;
+
       if (data) {
         setGames(data);
       }
@@ -32,7 +34,12 @@ export function Games() {
         <h4>Jogos salvos</h4>
         <div className={styles.gameList}>
           {games.map((item, index) => (
-            <Card key={index+1} index={index+1} gameId={item.id} title={item.title} />
+            <Card
+              key={index + 1}
+              index={index + 1}
+              gameId={item.id}
+              title={item.title}
+            />
           ))}
 
           <Button size="md" variant="outline">
