@@ -88,3 +88,137 @@
     font-size: 0.95rem;
   }
 }
+
+/* ===== SELECIONADO ===== */
+.selected {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(120, 90, 255, 0.3);
+  transform: scale(1.04);
+}
+
+/* ===== DESABILITADOS ===== */
+.opt:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* não selecionados após voto */
+.opt:disabled:not(.selected) {
+  opacity: 0.4;
+  filter: grayscale(0.6);
+}
+
+/* ===== RESULTADO ===== */
+.result {
+  margin-top: 24px;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.correct {
+  color: #22c55e;
+}
+
+.wrong {
+  color: #ef4444;
+}
+
+/* Container geral já existe, isso é só pra garantir alinhamento */
+.container {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #0f172a, #020617);
+  color: #f8fafc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Título */
+.rankingTitle {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Lista do ranking */
+.ranking {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  max-width: 360px;
+}
+
+/* Item do ranking */
+.rankingItem {
+  background: #020617;
+  border: 1px solid #1e293b;
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin-bottom: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  font-size: 1.05rem;
+  font-weight: 500;
+
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  animation: fadeUp 0.4s ease both;
+}
+
+/* Posição (1º, 2º, etc) */
+.position {
+  font-weight: 700;
+  margin-right: 12px;
+  min-width: 24px;
+}
+
+/* Nome do jogador */
+.playerName {
+  flex: 1;
+}
+
+/* Pontuação */
+.score {
+  font-weight: 700;
+  color: #22c55e;
+}
+
+/* Destaques do pódio */
+.first {
+  border-color: #facc15;
+  background: linear-gradient(135deg, #facc15 0%, #ca8a04 100%);
+  color: #020617;
+}
+
+.second {
+  border-color: #cbd5e1;
+  background: linear-gradient(135deg, #e5e7eb 0%, #94a3b8 100%);
+  color: #020617;
+}
+
+.third {
+  border-color: #f97316;
+  background: linear-gradient(135deg, #fb923c 0%, #c2410c 100%);
+  color: #020617;
+}
+
+/* Animação suave */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+

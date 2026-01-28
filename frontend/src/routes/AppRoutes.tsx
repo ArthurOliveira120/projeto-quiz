@@ -18,9 +18,7 @@ export function AppRoutes() {
       <Route
         path="/play/:pin"
         element={
-          <ProtectedRoute>
             <Play />
-          </ProtectedRoute>
         }
       />
       <Route

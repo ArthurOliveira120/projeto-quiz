@@ -19,18 +19,18 @@ export function Host() {
   const [gameStarted, setGameStarted] = useState(false);
   const [question, setQuestion] = useState<Question | null>(null);
 
+  const [ranking, setRanking] = useState<{ name: string; score: number }[]>([]);
+
   console.log("PIN:", pin);
   console.log("socket connected?", socket.connected);
 
   useEffect(() => {
     if (!pin || !session) return;
 
-    const username =
-      session.user.user_metadata?.username ||
-      session.user.email?.split("@")[0] ||
-      "Jogador";
-
     socket.emit("host_join", { pin });
+    socket.on("host_joined", ({ pin }) => {
+      console.log("✅ Host confirmado na sala", pin);
+    });
 
     socket.on("players_update", setPlayers);
 
@@ -48,11 +48,14 @@ export function Host() {
       navigate("/");
     });
 
+    socket.on("ranking", setRanking);
+
     return () => {
       socket.off("players_update");
       socket.off("game_started");
       socket.off("question");
       socket.off("join_error");
+      socket.off("ranking");
     };
   }, [pin, session, socket]);
 
@@ -131,6 +134,34 @@ export function Host() {
               </div>
             ))}
           </div>
+          <Button
+            variant="secondary"
+            size="lg"
+            onClick={() => socket.emit("finish_question", { pin })}
+          >
+            Finalizar Pergunta
+          </Button>
+
+          <Button
+            variant="primary"
+            size="lg"
+            onClick={() => socket.emit("show_ranking", { pin })}
+          >
+            Mostrar Ranking
+          </Button>
+        </div>
+      )}
+
+      {ranking.length > 0 && (
+        <div className={styles.ranking}>
+          <h2>🏆 Ranking Final</h2>
+          <ol>
+            {ranking.map((p, i) => (
+              <li key={i}>
+                {p.name} — {p.score} pts
+              </li>
+            ))}
+          </ol>
         </div>
       )}
     </div>

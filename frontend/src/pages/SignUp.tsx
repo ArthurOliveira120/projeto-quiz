@@ -20,7 +20,7 @@ export function SignUp() {
 
   useEffect(() => {
     if (session) {
-      navigate("/games");
+      navigate("/");
     }
   }, [session, navigate]);
 
