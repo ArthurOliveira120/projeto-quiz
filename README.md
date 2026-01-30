@@ -1,73 +1,88 @@
-# React + TypeScript + Vite
+# Rush Quiz
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Plataforma de quiz multiplayer em tempo real, inspirada no Kahoot, desenvolvida em React, Node.js, Socket.IO e Supabase.
 
-Currently, two official plugins are available:
+🔗 **Demo:** https://rush-quiz.vercel.app  
+🧪 **Modo teste:** entre em uma sala e jogue com amigos
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Funcionalidades
 
-## React Compiler
+- Criação de salas com PIN
+- Quiz multiplayer em tempo real
+- Host controla perguntas e fluxo do jogo
+- Jogadores respondem pelo celular
+- Ranking final com top 5
+- Comunicação via WebSockets
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tecnologias
 
-## Expanding the ESLint configuration
+### Frontend
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- React + Typescript
+- Vite
+- CSS Modules
+- Socket.IO Client
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Backend
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- Node.js
+- Express
+- Socket.IO
+- Supabase (PostgreSQL + Auth)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Deploy
+
+- Vercel
+- Render
+
+## Arquitetura 
+
+- Frontend e backend separados
+- Comunicação em tempo real via Socket.IO
+- Estado do jogo gerenciado pelo servidor
+- Persistência de dados com Supabase
+- Arquitetura orientada a eventos
+
+## Rodando localmente
+
+### Backend
+
+```bash
+cd backend
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Frontend
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+cd frontend
 ```
+
+Crie um .env com:
+
+```env
+VITE_BACKEND_URL=http://localhost:3001
+```
+
+Em seguida:
+
+```bash
+npm install
+npm run dev
+```
+
+## Status do projeto
+
+Em desenvolvimento ativo, com novas funcionalidades sendo adicionadas (melhorias visuais, tempo, pontuação, criação/edição de jogos, etc)
+
+## Autores
+
+Arthur Oliveira Marinho
+💼 Estudante / Desenvolvedor Full Stack
+🔗 Github: https://github.com/ArthurOliveira120
+
+Matheus Araujo de Lima
+💼 Estudante / Desenvolvedor Full Stack
+🔗 Github: https://github.com/MatheusLima505
+
