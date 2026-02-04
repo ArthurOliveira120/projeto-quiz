@@ -20,8 +20,8 @@ const io = new Server(httpServer, { cors: { origin: "*" } });
 
 type Player = { name: string; socketId: string };
 type GameState = { started: boolean; currentQuestion: number };
-type Answer = { playerName: string; optionId: string };
-type QuestionState = { questionId: string; answers: Answer[] };
+type Answer = { playerName: string; optionId: number };
+type QuestionState = { questionId: number; answers: Answer[] };
 
 const playersByPin: Record<string, Player[]> = {};
 const gameStateByPin: Record<string, GameState> = {};
@@ -70,7 +70,7 @@ io.on("connection", (socket) => {
     if (hostByPin[pin] !== socket.id) return;
 
     gameStateByPin[pin] = { started: true, currentQuestion: 0 };
-    scoreByPin[pin] = {}; // 👈 inicia placar
+    scoreByPin[pin] = {};
 
     io.to(pin).emit("game_started");
   });
@@ -118,7 +118,7 @@ io.on("connection", (socket) => {
 
   socket.on(
     "submit_answer",
-    async ({ pin, questionId, optionId, playerName }) => {
+    async ({ pin, playerId, playerName, questionId, optionId }) => {
       const state = answersByPin[pin];
       if (!state || state.questionId !== questionId) return;
 
@@ -128,9 +128,10 @@ io.on("connection", (socket) => {
 
       await supabase.from("answers").insert({
         pin,
+        player_id: playerId,
+        player_name: playerName,
         question_id: questionId,
         option_id: optionId,
-        player_name: playerName,
       });
 
       io.to(hostByPin[pin]).emit("player_answered", {
@@ -181,7 +182,7 @@ io.on("connection", (socket) => {
       .slice(0, 5);
 
     io.to(pin).emit("ranking", ranking);
-  }); 
+  });
 
   socket.on("disconnect", () => {
     const player = socketToPlayer[socket.id];

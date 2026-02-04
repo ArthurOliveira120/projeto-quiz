@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import { ProtectedRoute } from "./ProtectedRoute";
 
 import { Index } from "../pages/Index";
-import { Games } from "../pages/Games";
+import { GamesList } from "../pages/GamesList";
 import { NewGame } from "../pages/NewGame";
 import { EditGame } from "../pages/EditGame";
 import { Host } from "../pages/Host";
@@ -34,7 +34,7 @@ export function AppRoutes() {
         path="/games"
         element={
           <ProtectedRoute>
-            <Games />
+            <GamesList />
           </ProtectedRoute>
         }
       />

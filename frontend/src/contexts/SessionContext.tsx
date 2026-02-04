@@ -115,6 +115,7 @@ export function SessionProvider({ children }: SessionProviderProps) {
       setSessionError(error.message ?? "Erro ao fazer login.");
     } finally {
       setSessionLoading(false);
+      window.location.href = "/";
     }
   }
 

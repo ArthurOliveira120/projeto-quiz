@@ -7,13 +7,13 @@ export type Game = {
 }
 
 export type Option = {
-  id: string;
+  id: number;
   text: string;
   order: number;
 };
 
 export type Question = {
-  id: string;
+  id: number;
   text: string;
   options: Option[];
 };

@@ -2,24 +2,28 @@ import { Button } from "../components/Button";
 
 import styles from "./Index.module.css";
 import { useNavigate } from "react-router-dom";
-import { useRef, useState } from "react";
+import { useRef } from "react";
+import { useSession } from "../hooks/useSession";
 
 export function Index() {
   const inputRef = useRef<HTMLInputElement>(null);
+  const nameRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
-  const [name, setName] = useState("");
+  const { session } = useSession();
 
   return (
     <>
       <div className={styles.container}>
-        <h1>Quiz</h1>
+        <h1>Rush Quiz</h1>
 
-        <input
-          type="text"
-          placeholder="Seu nome"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
+        {!session && (
+          <input
+            type="text"
+            className={styles.inputName}
+            placeholder="Seu nome"
+            ref={nameRef}
+          />
+        )}
 
         <div className={styles.enterPin}>
           <input
@@ -40,14 +44,16 @@ export function Index() {
                 return;
               }
 
-              if (!name.trim()) {
+              if (!session && !nameRef.current?.value) {
                 alert("Digite seu nome");
                 return;
+              } else if (!session && nameRef.current?.value) {
+                localStorage.setItem("player_name", nameRef.current.value);
               }
 
-              localStorage.setItem("player_name", name.trim());
-
-              navigate(`/play/${inputRef.current?.value}`);
+              if (session || nameRef.current?.value) {
+                navigate(`/play/${inputRef.current?.value}`);
+              }
             }}
           >
             Entrar na sala

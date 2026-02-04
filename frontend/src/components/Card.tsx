@@ -2,17 +2,20 @@ import styles from "./Card.module.css";
 
 import { Button } from "./Button";
 import { useNavigate } from "react-router-dom";
+import type { Dispatch, SetStateAction } from "react";
 
 type cardProps = {
   index: number;
   gameId: string;
   title: string;
+  setLoadingGame: Dispatch<SetStateAction<boolean>>;
 };
 
-export function Card({ index, gameId, title }: cardProps) {
+export function Card({ index, gameId, title, setLoadingGame }: cardProps) {
   const navigate = useNavigate();
 
   async function handleStartGame() {
+    setLoadingGame(true);
     const res = await fetch(
       "https://projeto-quiz-backend.onrender.com/sessions",
       {
@@ -33,6 +36,7 @@ export function Card({ index, gameId, title }: cardProps) {
       return;
     }
 
+    setLoadingGame(false);
     navigate(`/host/${data.pin}`);
   }
 

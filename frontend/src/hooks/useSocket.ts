@@ -6,11 +6,6 @@ export function useSocket() {
     if (!socket.connected) {
       socket.connect();
     }
-
-    return () => {
-      // NÃO desconectar aqui
-      // socket deve viver enquanto a app vive
-    };
   }, []);
 
   return socket;

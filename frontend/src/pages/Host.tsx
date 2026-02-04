@@ -28,6 +28,7 @@ export function Host() {
     if (!pin || !session) return;
 
     socket.emit("host_join", { pin });
+
     socket.on("host_joined", ({ pin }) => {
       console.log("✅ Host confirmado na sala", pin);
     });
@@ -70,8 +71,6 @@ export function Host() {
   }, [socket]);
 
   function handleStartGame() {
-    console.log("função do carai sendo chamada");
-
     if (!pin) {
       console.log("pin inválido");
       return;
