@@ -5,7 +5,17 @@ import { useParams } from "react-router-dom";
 import { useSocket } from "../hooks/useSocket";
 import { useSession } from "../hooks/useSession";
 
-import type { Question } from "../types/game";
+type Option = {
+  id: number;
+  text: string;
+  is_correct: boolean;
+};
+
+type Question = {
+  id: number;
+  text: string;
+  options: Option[];
+};
 
 type QuestionResult = {
   correctOptionId: number;

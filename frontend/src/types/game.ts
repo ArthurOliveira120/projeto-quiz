@@ -11,7 +11,7 @@ export type Question = {
   game_id: string;
   order: number;
   text: string;
-  options?: Option[];
+  options: Option[];
 };
 
 export type Option = {

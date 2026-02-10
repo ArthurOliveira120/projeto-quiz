@@ -7,7 +7,7 @@ Plataforma de quiz multiplayer em tempo real, inspirada no Kahoot, desenvolvida 
 
 ## Funcionalidades
 
-- Criação de salas com PIN
+- Criação de jogos e salas com PIN
 - Quiz multiplayer em tempo real
 - Host controla perguntas e fluxo do jogo
 - Jogadores respondem pelo celular
